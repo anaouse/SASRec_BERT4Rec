@@ -309,7 +309,7 @@ def train(model, dataloader, user_train, user_valid, user_test, itemnum, optimiz
             # save best model
             if valid_metrics['NDCG@10'] > best_valid_ndcg:
                 best_valid_ndcg = valid_metrics['NDCG@10']
-                torch.save(model.state_dict(), 'best_model.pth')
+                torch.save(model.state_dict(), 'bert_best_model.pth')
                 print(f"Best model saved! (NDCG@10: {best_valid_ndcg:.4f})")
         
             print(f"\n{'='*50}")
@@ -337,7 +337,7 @@ def train(model, dataloader, user_train, user_valid, user_test, itemnum, optimiz
     plot_training_curves(history, model_name="BERT4Rec")
     
     print("Loading best model for final test...")
-    model.load_state_dict(torch.load('best_model.pth'))
+    model.load_state_dict(torch.load('bert_best_model.pth'))
     
     print(f"\nFinal Test Metrics:")
     print(f"  HR@1:    {final_metrics['HR@1']:.4f}")
